@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <title>Yağız Berk Önay – Link Hub</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Yağız Berk Önay - Kurucu & Kıdemli Yazılım Geliştirici için link hub." />
+  <meta name="description" content="Yağız Berk Önay - Founder & Senior Software Engineer link hub." />
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -32,20 +32,23 @@
       padding: 0;
     }
 
-    html,
-    body {
-      height: 100%;
-    }
-
     body {
       font-family: "Poppins", system-ui, -apple-system, BlinkMacSystemFont,
         "Segoe UI", sans-serif;
       background: radial-gradient(circle at top left, #f9fafb 0, var(--bg) 55%);
       color: var(--text-main);
+      min-height: 100vh;
       display: flex;
-      align-items: center;
       justify-content: center;
-      padding: 24px;
+      align-items: flex-start;
+      padding: 24px 16px 32px;
+    }
+
+    @media (min-width: 768px) {
+      body {
+        align-items: center;
+        padding: 32px;
+      }
     }
 
     .shell {
@@ -56,7 +59,7 @@
     .card {
       background: var(--surface);
       border-radius: 28px;
-      padding: 28px 24px 26px;
+      padding: 28px 24px 24px;
       box-shadow: 0 22px 45px rgba(15, 23, 42, 0.12);
       border: 1px solid var(--border-subtle);
       position: relative;
@@ -84,8 +87,8 @@
 
     .brand {
       display: flex;
-      flex-direction: column;
-      gap: 4px;
+      align-items: center;
+      gap: 10px;
     }
 
     .brand-mark {
@@ -102,6 +105,12 @@
       width: 18px;
       height: 18px;
       fill: #ffffff;
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
     }
 
     .brand-title {
@@ -134,7 +143,7 @@
 
     .hero {
       text-align: left;
-      margin-bottom: 22px;
+      margin-bottom: 18px;
     }
 
     .hero-name {
@@ -147,7 +156,7 @@
     .hero-role {
       font-size: 13px;
       color: var(--text-muted);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .hero-desc {
@@ -156,8 +165,16 @@
       max-width: 90%;
     }
 
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--text-muted);
+      margin: 14px 0 6px;
+    }
+
     .links {
-      margin-top: 18px;
+      margin-top: 6px;
       display: flex;
       flex-direction: column;
       gap: 10px;
@@ -258,8 +275,43 @@
       outline-offset: 3px;
     }
 
-    footer {
+    .hermes-section {
       margin-top: 18px;
+      padding: 14px 14px 12px;
+      border-radius: 18px;
+      border: 1px dashed var(--accent-soft);
+      background: #f9fafb;
+    }
+
+    .hermes-section-title {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .hermes-section-text {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .pill {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: 1px solid var(--accent-soft);
+      font-size: 11px;
+      color: var(--text-main);
+      background: #ffffff;
+    }
+
+    footer {
+      margin-top: 16px;
       font-size: 11px;
       color: var(--text-muted);
       display: flex;
@@ -280,7 +332,7 @@
     @media (max-width: 520px) {
       .card {
         border-radius: 22px;
-        padding: 22px 18px 20px;
+        padding: 22px 18px 18px;
       }
 
       .hero-name {
@@ -317,27 +369,30 @@
               <path d="M12 3c.9 1.7 1.9 2.7 3.6 3.6C13.9 7.5 12.9 8.5 12 10c-.9-1.5-1.9-2.5-3.6-3.4C10.1 5.7 11.1 4.7 12 3zm0 11c.9 1.5 1.9 2.5 3.6 3.4-1.7.9-2.7 1.9-3.6 3.6-.9-1.7-1.9-2.7-3.6-3.6 1.7-.9 2.7-1.9 3.6-3.4z"/>
             </svg>
           </div>
-          <div>
+          <div class="brand-text">
             <div class="brand-title">Hermes Software</div>
-            <div class="brand-subtitle">Dijital Varlığınızı Yaratın</div>
+            <div class="brand-subtitle">From Creative Individuals to Creative Individuals</div>
           </div>
         </div>
 
         <div class="tagline-pill">
-          Yaratıcı kişilerden yaratıcı kişilere
+          Founder &amp; Senior Software Engineer
         </div>
       </header>
 
       <main>
         <section class="hero">
           <h1 class="hero-name">Yağız Berk Önay</h1>
-          <div class="hero-role">Kurucu &amp; Kıdemli Yazılım Geliştirici</div>
+          <div class="hero-role">Founder &amp; Senior Software Engineer</div>
           <p class="hero-desc">
-            Web, ürün ve yazılım projeleri için teknik liderlik ve full-stack çözümler. Aşağıdan benimle ilgili tüm dijital profillere ulaşabilirsin.
+            Web, ürün ve yazılım projeleri için uçtan uca çözüm ve teknik liderlik.
+            Aşağıdan GitHub, portfolio, Hermes Software ve iletişim kanallarıma ulaşabilirsin.
           </p>
         </section>
 
-        <section class="links" aria-label="Bağlantılar">
+        <!-- Work Links -->
+        <div class="section-title">Work</div>
+        <section class="links" aria-label="Work links">
           <!-- GitHub -->
           <a
             class="link-btn link-btn-primary"
@@ -364,74 +419,6 @@
                 <path
                   d="M8 16L19 5"
                   stroke="white"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </span>
-          </a>
-
-          <!-- LİNK -->
-          <a
-            class="link-btn"
-            href="mailto:contact@hermessoftware.net"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="link-left">
-              <div class="link-icon-circle">EM</div>
-              <div>
-                <div class="link-title">Mail</div>
-                <div class="link-subtitle">contact@hermessoftware.net</div>
-              </div>
-            </div>
-            <span class="link-arrow" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M9 6h9v9"
-                  stroke="#111827"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M9 15L18 6"
-                  stroke="#111827"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </span>
-          </a>
-
-          <!-- Hermes -->
-          <a
-            class="link-btn"
-            href="https://hermessoftware.net"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div class="link-left">
-              <div class="link-icon-circle">HS</div>
-              <div>
-                <div class="link-title">Hermes</div>
-                <div class="link-subtitle">hermessoftware.net</div>
-              </div>
-            </div>
-            <span class="link-arrow" aria-hidden="true">
-              <svg viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M9 6h9v9"
-                  stroke="#111827"
-                  stroke-width="1.6"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-                <path
-                  d="M9 15L18 6"
-                  stroke="#111827"
                   stroke-width="1.6"
                   stroke-linecap="round"
                   stroke-linejoin="round"
@@ -474,6 +461,44 @@
             </span>
           </a>
 
+          <!-- Hermes Website -->
+          <a
+            class="link-btn"
+            href="https://hermessoftware.net"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="link-left">
+              <div class="link-icon-circle">HS</div>
+              <div>
+                <div class="link-title">Hermes Software</div>
+                <div class="link-subtitle">hermessoftware.net</div>
+              </div>
+            </div>
+            <span class="link-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M9 6h9v9"
+                  stroke="#111827"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M9 15L18 6"
+                  stroke="#111827"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+        </section>
+
+        <!-- Social Links -->
+        <div class="section-title">Social</div>
+        <section class="links" aria-label="Social links">
           <!-- Instagram -->
           <a
             class="link-btn"
@@ -508,11 +533,92 @@
             </span>
           </a>
         </section>
+
+        <!-- Contact Links -->
+        <div class="section-title">Contact</div>
+        <section class="links" aria-label="Contact links">
+          <!-- Email -->
+          <a
+            class="link-btn"
+            href="mailto:contact@hermessoftware.net"
+          >
+            <div class="link-left">
+              <div class="link-icon-circle">@</div>
+              <div>
+                <div class="link-title">E-posta</div>
+                <div class="link-subtitle">contact@hermessoftware.net</div>
+              </div>
+            </div>
+            <span class="link-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M4 7l8 5 8-5"
+                  stroke="#111827"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+                <path
+                  d="M5 6h14v12H5z"
+                  stroke="#111827"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+
+          <!-- Phone -->
+          <a
+            class="link-btn"
+            href="tel:+905442577760"
+          >
+            <div class="link-left">
+              <div class="link-icon-circle">☎</div>
+              <div>
+                <div class="link-title">Telefon</div>
+                <div class="link-subtitle">+90 544 257 77 60</div>
+              </div>
+            </div>
+            <span class="link-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none">
+                <path
+                  d="M6 4h3l2 4-2 1c.7 1.4 1.6 2.3 3 3l1-2 4 2v3c0 .6-.4 1-1 1A11 11 0 0 1 5 7c0-.6.4-1 1-1z"
+                  stroke="#111827"
+                  stroke-width="1.6"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </a>
+        </section>
+
+        <!-- Hermes Description Section -->
+        <section class="hermes-section" aria-label="Hermes Software hakkında">
+          <div class="hermes-section-title">Hermes Software ne yapar?</div>
+          <p class="hermes-section-text">
+            Hermes Software, işletmeler için “işi kağıttan ekrana taşıyan” yazılımlar
+            geliştirir. Randevu, stok, satış, personel ya da müşteri takibi gibi günlük
+            işleri; tek ekrandan, internet üzerinden yönetebileceğiniz sistemlere
+            dönüştürür. Yani, işinizi büyütürken sizi telefon defteri, Excel ve
+            karışık programlardan kurtarır.
+          </p>
+          <div class="pill-row">
+            <span class="pill">Web Yazılım</span>
+            <span class="pill">Yapay zeka sistemleri</span>
+            <span class="pill">İşletmeye özel yönetim panelleri</span>
+            <span class="pill">Online ödeme &amp; abonelik altyapıları</span>
+            <span class="pill">Mevcut işi dijitale taşıma</span>
+            <span class="pill">Uzun vadeli bakım &amp; destek</span>
+          </div>
+        </section>
       </main>
 
       <footer>
         <div class="footer-left">
-          From creative individuals to creative individuals.
+          From Creative Individuals to Creative Individuals.
         </div>
         <div class="footer-right">
           hermessoftware.net &nbsp;|&nbsp; yagiz.space
