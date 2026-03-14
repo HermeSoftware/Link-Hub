@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermes Software Inc.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Ubuntu:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --white: #ffffff;
+  --bg:    #F5F5F7;
+  --bg2:   #EBEBED;
+  --ink:   #060B1C;
+  --ink2:  #1a1f2e;
+  --ink3:  #3a3f50;
+  --muted: #8a8f9e;
+  --line:  rgba(6,11,28,0.09);
+  --font-head: 'Poppins', sans-serif;
+  --font-body: 'Ubuntu', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--white);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--ink); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 6%; height: 64px;
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--line);
+  transition: background 0.3s;
+}
+nav.scrolled { background: rgba(255,255,255,0.97); }
+
+.nav-logo {
+  font-family: var(--font-head);
+  font-size: 1rem; font-weight: 700;
+  color: var(--ink); letter-spacing: -0.02em;
+  display: flex; align-items: center; gap: 0.5rem;
+  text-decoration: none;
+}
+.nav-logo-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px;
+  background: var(--ink); color: var(--white);
+  border-radius: 6px;
+  font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+}
+
+.nav-right { display: flex; align-items: center; gap: 1.5rem; }
+
+.nav-links {
+  display: flex; align-items: center; gap: 2.25rem; list-style: none;
+}
+.nav-links a {
+  font-family: var(--font-body);
+  color: var(--ink3); text-decoration: none;
+  font-size: 0.85rem; font-weight: 500;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+.nav-cta {
+  background: var(--ink) !important; color: var(--white) !important;
+  padding: 0.48rem 1.2rem; border-radius: 6px;
+  font-weight: 600 !important; font-size: 0.82rem !important;
+  transition: opacity 0.2s !important, transform 0.2s !important;
+}
+.nav-cta:hover { opacity: 0.82 !important; transform: translateY(-1px) !important; }
+
+/* ── LANG SWITCHER ── */
+.lang-switch {
+  display: flex; align-items: center;
+  border: 1.5px solid var(--line);
+  border-radius: 6px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.lang-btn {
+  padding: 0.32rem 0.62rem;
+  font-family: var(--font-mono);
+  font-size: 0.68rem; font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+  background: transparent;
+  border: none; cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+  line-height: 1;
+}
+.lang-btn.active {
+  background: var(--ink);
+  color: var(--white);
+}
+.lang-sep { width: 1px; background: var(--line); height: 22px; }
+
+.nav-toggle {
+  display: none; flex-direction: column; gap: 5px;
+  cursor: pointer; padding: 4px; background: none; border: none;
+}
+.nav-toggle span {
+  display: block; width: 22px; height: 1.5px;
+  background: var(--ink); border-radius: 2px; transition: 0.3s;
+}
+
+/* ── HERO ── */
+#hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 110px 6% 80px;
+  background: var(--white);
+  position: relative; overflow: hidden;
+}
+
+.hero-noise {
+  position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: 0.02;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+}
+.hero-vline { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); }
+.hero-vline.l { left: 6%; }
+.hero-vline.r { right: 6%; }
+
+.hero-inner { position: relative; z-index: 1; max-width: 880px; }
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.7rem; font-weight: 500;
+  color: var(--muted); letter-spacing: 0.14em; text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  display: flex; align-items: center; gap: 0.75rem;
+  animation: fadeUp 0.65s ease both;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--muted); }
+
+.hero-title {
+  font-family: var(--font-head);
+  font-size: clamp(3rem, 7.5vw, 6.25rem);
+  font-weight: 800; line-height: 1.0;
+  letter-spacing: -0.04em; color: var(--ink);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.65s 0.08s ease both;
+}
+.hero-title em { font-style: normal; color: var(--muted); font-weight: 300; }
+
+.hero-sub {
+  font-family: var(--font-body);
+  font-size: 1rem; color: var(--ink3); font-weight: 300;
+  max-width: 480px; margin-bottom: 2.5rem; line-height: 1.8;
+  animation: fadeUp 0.65s 0.16s ease both;
+}
+
+.hero-actions {
+  display: flex; align-items: center; gap: 0.9rem; flex-wrap: wrap;
+  animation: fadeUp 0.65s 0.24s ease both;
+}
+
+.btn-ink {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--ink); color: var(--white);
+  padding: 0.78rem 1.65rem; border-radius: 6px;
+  font-family: var(--font-body); font-size: 0.875rem; font-weight: 600;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+}
+.btn-ink:hover { transform: translateY(-2px); opacity: 0.82; }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: transparent; color: var(--ink);
+  padding: 0.78rem 1.65rem; border-radius: 6px;
+  font-family: var(--font-body); font-size: 0.875rem; font-weight: 600;
+  text-decoration: none; border: 1.5px solid var(--line); cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s, background 0.2s;
+}
+.btn-ghost:hover { border-color: var(--ink); background: var(--bg); transform: translateY(-2px); }
+
+.hero-stats {
+  display: flex; gap: 3rem; flex-wrap: wrap;
+  margin-top: 5rem; padding-top: 3rem;
+  border-top: 1px solid var(--line);
+  animation: fadeUp 0.65s 0.32s ease both;
+}
+.h-stat-num {
+  font-family: var(--font-head); font-size: 2rem; font-weight: 800;
+  color: var(--ink); letter-spacing: -0.04em; line-height: 1;
+}
+.h-stat-label {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.3rem;
+}
+
+/* ── SECTIONS ── */
+section { padding: 96px 6%; }
+
+.section-tag {
+  font-family: var(--font-mono); font-size: 0.67rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted);
+  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.9rem;
+}
+.section-tag::before { content: ''; display: block; width: 18px; height: 1px; background: var(--muted); }
+
+.section-title {
+  font-family: var(--font-head); font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+  font-weight: 700; letter-spacing: -0.035em;
+  color: var(--ink); line-height: 1.1; margin-bottom: 0.75rem;
+}
+.section-desc {
+  color: var(--ink3); font-size: 0.93rem; font-weight: 300;
+  max-width: 470px; margin-bottom: 3rem; line-height: 1.8;
+}
+
+/* ── SERVICES ── */
+#services { background: var(--bg); }
+
+.search-wrap { position: relative; max-width: 360px; margin-bottom: 1.5rem; }
+.search-icon {
+  position: absolute; left: 0.85rem; top: 50%; transform: translateY(-50%);
+  width: 14px; height: 14px; color: var(--muted); pointer-events: none;
+}
+#searchInput {
+  width: 100%; background: var(--white);
+  border: 1.5px solid var(--line); border-radius: 6px;
+  padding: 0.6rem 0.85rem 0.6rem 2.3rem;
+  color: var(--ink); font-family: var(--font-mono); font-size: 0.78rem;
+  outline: none; transition: border-color 0.2s;
+}
+#searchInput:focus { border-color: var(--ink); }
+#searchInput::placeholder { color: var(--muted); }
+
+.cat-tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 2.25rem; }
+.cat-tab {
+  padding: 0.32rem 0.85rem; border-radius: 4px;
+  font-family: var(--font-mono); font-size: 0.7rem; font-weight: 500;
+  cursor: pointer; border: 1.5px solid var(--line);
+  background: var(--white); color: var(--muted);
+  transition: all 0.18s; letter-spacing: 0.04em;
+}
+.cat-tab:hover { border-color: var(--ink); color: var(--ink); }
+.cat-tab.active { background: var(--ink); border-color: var(--ink); color: var(--white); }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(235px, 1fr));
+  gap: 1px; border: 1px solid var(--line);
+  border-radius: 10px; overflow: hidden; background: var(--line);
+}
+
+.service-card {
+  background: var(--white); padding: 1.4rem 1.35rem;
+  position: relative; cursor: default; transition: background 0.18s;
+}
+.service-card:hover { background: var(--bg); }
+.service-card:hover .card-arrow { opacity: 1; transform: translate(2px,-2px); }
+
+.card-cat-tag {
+  font-family: var(--font-mono); font-size: 0.62rem; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.45rem;
+}
+.card-name {
+  font-family: var(--font-head); font-size: 0.92rem; font-weight: 600;
+  color: var(--ink); margin-bottom: 1.15rem; line-height: 1.35; letter-spacing: -0.01em;
+}
+.card-price {
+  font-family: var(--font-mono); font-size: 0.97rem; font-weight: 700;
+  color: var(--ink2); letter-spacing: -0.02em;
+}
+.card-price span {
+  display: block; font-size: 0.62rem; font-weight: 400;
+  color: var(--muted); letter-spacing: 0.05em; margin-top: 0.1rem;
+}
+.card-arrow {
+  position: absolute; top: 1.1rem; right: 1.1rem;
+  font-size: 0.75rem; color: var(--muted);
+  opacity: 0; transition: opacity 0.18s, transform 0.18s;
+}
+
+.no-results {
+  grid-column: 1/-1; background: var(--white);
+  text-align: center; padding: 4rem;
+  color: var(--muted); font-family: var(--font-mono); font-size: 0.82rem;
+}
+
+/* ── SUBSCRIPTIONS ── */
+#subscriptions { background: var(--white); }
+
+.plans-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(218px, 1fr));
+  gap: 1.25rem;
+}
+
+.plan-card {
+  background: var(--bg); border: 1.5px solid var(--line);
+  border-radius: 10px; padding: 1.85rem 1.6rem;
+  transition: transform 0.22s, border-color 0.22s, box-shadow 0.22s;
+}
+.plan-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 14px 36px rgba(6,11,28,0.09);
+  border-color: rgba(6,11,28,0.18);
+}
+.plan-card.featured {
+  background: var(--ink); border-color: var(--ink);
+}
+.plan-card.featured:hover {
+  box-shadow: 0 20px 50px rgba(6,11,28,0.28);
+}
+
+.plan-tag {
+  font-family: var(--font-mono); font-size: 0.63rem; font-weight: 700;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 0.18rem 0.55rem; border-radius: 3px;
+  background: var(--white); color: var(--ink);
+  display: inline-block; margin-bottom: 0.85rem;
+}
+
+.plan-name {
+  font-family: var(--font-head); font-size: 1.05rem; font-weight: 700;
+  letter-spacing: -0.02em; color: var(--ink);
+}
+.plan-card.featured .plan-name { color: var(--white); }
+
+.plan-price {
+  font-family: var(--font-mono); font-size: 1.7rem; font-weight: 700;
+  letter-spacing: -0.04em; color: var(--ink);
+  margin: 0.9rem 0 0; line-height: 1;
+}
+.plan-card.featured .plan-price { color: var(--white); }
+
+.plan-per {
+  font-family: var(--font-mono); font-size: 0.65rem;
+  color: var(--muted); letter-spacing: 0.07em; margin-top: 0.2rem;
+}
+.plan-card.featured .plan-per { color: rgba(255,255,255,0.45); }
+
+.plan-divider { height: 1px; background: var(--line); margin: 1.4rem 0; }
+.plan-card.featured .plan-divider { background: rgba(255,255,255,0.12); }
+
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
+.plan-features li {
+  display: flex; align-items: flex-start; gap: 0.55rem;
+  font-size: 0.83rem; font-weight: 300; color: var(--ink3);
+}
+.plan-card.featured .plan-features li { color: rgba(255,255,255,0.7); }
+.plan-features li::before {
+  content: '—'; font-family: var(--font-mono); font-size: 0.62rem;
+  color: var(--muted); flex-shrink: 0; margin-top: 3px;
+}
+.plan-card.featured .plan-features li::before { color: rgba(255,255,255,0.3); }
+
+/* ── MAINTENANCE ── */
+#maintenance { background: var(--bg); }
+
+.maint-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.25rem;
+}
+.maint-card {
+  background: var(--white); border: 1.5px solid var(--line);
+  border-radius: 10px; padding: 2.25rem;
+  transition: transform 0.22s, box-shadow 0.22s, border-color 0.22s;
+}
+.maint-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(6,11,28,0.08);
+  border-color: rgba(6,11,28,0.15);
+}
+
+.maint-num {
+  font-family: var(--font-mono); font-size: 0.65rem; font-weight: 700;
+  letter-spacing: 0.12em; color: var(--muted); text-transform: uppercase;
+  margin-bottom: 1.4rem;
+}
+.maint-name {
+  font-family: var(--font-head); font-size: 1.2rem; font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.maint-price {
+  font-family: var(--font-mono); font-size: 2rem; font-weight: 700;
+  letter-spacing: -0.04em; color: var(--ink);
+  margin: 0.9rem 0 1.7rem; line-height: 1;
+}
+.maint-label {
+  font-family: var(--font-mono); font-size: 0.63rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 0.7rem;
+}
+.maint-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+.maint-list li {
+  display: flex; align-items: center; gap: 0.65rem;
+  font-size: 0.875rem; font-weight: 300; color: var(--ink3);
+}
+.maint-list li::before {
+  content: ''; width: 4px; height: 4px;
+  background: var(--ink); border-radius: 50%; flex-shrink: 0;
+}
+
+/* ── CONTACT ── */
+#contact { background: var(--ink); color: var(--white); }
+
+.cta-inner { max-width: 660px; }
+
+.cta-tag {
+  font-family: var(--font-mono); font-size: 0.67rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem;
+}
+.cta-tag::before { content: ''; display: block; width: 18px; height: 1px; background: rgba(255,255,255,0.3); }
+
+.cta-title {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 800; letter-spacing: -0.04em;
+  color: var(--white); line-height: 1.05; margin-bottom: 1rem;
+}
+.cta-title em { font-style: normal; color: rgba(255,255,255,0.35); font-weight: 300; }
+
+.cta-sub {
+  font-size: 0.93rem; color: rgba(255,255,255,0.45);
+  font-weight: 300; margin-bottom: 2.5rem;
+}
+
+.btn-white {
+  display: inline-flex; align-items: center; gap: 0.4rem;
+  background: var(--white); color: var(--ink);
+  padding: 0.82rem 1.65rem; border-radius: 6px;
+  font-family: var(--font-body); font-size: 0.875rem; font-weight: 700;
+  text-decoration: none; border: none; cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+}
+.btn-white:hover { opacity: 0.88; transform: translateY(-2px); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--ink2);
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding: 3rem 6% 2rem;
+}
+.footer-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  flex-wrap: wrap; gap: 2.5rem; margin-bottom: 3rem;
+}
+.f-brand-mark {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 28px; height: 28px; background: var(--white); color: var(--ink);
+  border-radius: 6px; font-family: var(--font-mono); font-size: 0.72rem; font-weight: 700;
+  margin-bottom: 0.75rem;
+}
+.f-brand p {
+  color: rgba(255,255,255,0.3); font-size: 0.82rem; font-weight: 300;
+  max-width: 230px; line-height: 1.65; margin-top: 0.5rem;
+}
+.f-col h5 {
+  font-family: var(--font-mono); font-size: 0.63rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: rgba(255,255,255,0.3); margin-bottom: 0.9rem;
+}
+.f-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+.f-col a {
+  color: rgba(255,255,255,0.45); text-decoration: none;
+  font-size: 0.85rem; font-weight: 300; transition: color 0.2s;
+}
+.f-col a:hover { color: var(--white); }
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.06);
+  padding-top: 1.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  flex-wrap: wrap; gap: 0.75rem;
+}
+.footer-bottom p {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.05em; color: rgba(255,255,255,0.2);
+}
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0; transform: translateY(22px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .nav-links {
+    display: none; position: fixed;
+    top: 64px; left: 0; right: 0;
+    background: rgba(255,255,255,0.98);
+    padding: 1.5rem 6%; flex-direction: column; gap: 1.25rem;
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-links.open { display: flex; }
+  .nav-toggle { display: flex; }
+  .plans-grid { grid-template-columns: 1fr; }
+  .maint-grid { grid-template-columns: 1fr; }
+  .footer-top { flex-direction: column; }
+  section { padding: 70px 6%; }
+  .hero-vline { display: none; }
+  .hero-stats { gap: 2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <div class="nav-logo-mark">HS</div>
+    Hermes Software
+  </a>
+  <div class="nav-right">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services" data-i18n="nav.services">Hizmetler</a></li>
+      <li><a href="#subscriptions" data-i18n="nav.plans">Planlar</a></li>
+      <li><a href="#maintenance" data-i18n="nav.maintenance">Bakım</a></li>
+      <li><a href="#contact" class="nav-cta" data-i18n="nav.contact">İletişim</a></li>
+    </ul>
+    <div class="lang-switch">
+      <button class="lang-btn active" onclick="setLang('tr')" id="btn-tr">TR</button>
+      <div class="lang-sep"></div>
+      <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+    </div>
+    <button class="nav-toggle" onclick="toggleNav()" aria-label="Menü">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-noise"></div>
+  <div class="hero-vline l"></div>
+  <div class="hero-vline r"></div>
+
+  <div class="hero-inner">
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Premium Dijital Altyapı</div>
+    <h1 class="hero-title">
+      Hermes<br>
+      <em>Software Inc.</em>
+    </h1>
+    <p class="hero-sub" data-i18n="hero.sub">
+      Landing sayfalarından kurumsal SaaS platformlarına, yapay zeka sistemlerinden blockchain altyapısına — ölçeklenebilir yazılımlar geliştiriyoruz.
+    </p>
+    <div class="hero-actions">
+      <a href="#services" class="btn-ink" data-i18n="hero.btn1">Hizmetleri İncele →</a>
+      <a href="#contact" class="btn-ghost" data-i18n="hero.btn2">Bize Ulaşın</a>
+    </div>
+
+    <div class="hero-stats">
+      <div>
+        <div class="h-stat-num">1000+</div>
+        <div class="h-stat-label" data-i18n="hero.stat1">Teslim Edilen Proje</div>
+      </div>
+      <div>
+        <div class="h-stat-num">10</div>
+        <div class="h-stat-label" data-i18n="hero.stat2">Hizmet Kategorisi</div>
+      </div>
+      <div>
+        <div class="h-stat-num">99.9%</div>
+        <div class="h-stat-label" data-i18n="hero.stat3">Çalışma Süresi</div>
+      </div>
+      <div>
+        <div class="h-stat-num">24/7</div>
+        <div class="h-stat-label" data-i18n="hero.stat4">Destek</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="reveal">
+    <div class="section-tag" data-i18n="services.tag">Hizmet Kataloğu</div>
+    <h2 class="section-title" data-i18n="services.title">Neler Yapıyoruz</h2>
+    <p class="section-desc" data-i18n="services.desc">Web, mobil, yapay zeka, blockchain ve altyapı alanlarında hassas mühendislik.</p>
+  </div>
+
+  <div class="reveal">
+    <div class="search-wrap">
+      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+        <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+      </svg>
+      <input type="text" id="searchInput" data-i18n-placeholder="services.search" placeholder="Hizmet ara…" oninput="filterServices()" autocomplete="off">
+    </div>
+    <div class="cat-tabs" id="catTabs">
+      <button class="cat-tab active" onclick="filterCat('all',this)" data-i18n="cat.all">Tümü</button>
+      <button class="cat-tab" onclick="filterCat('web',this)" data-i18n="cat.web">Web</button>
+      <button class="cat-tab" onclick="filterCat('ecommerce',this)" data-i18n="cat.ecommerce">E-Ticaret</button>
+      <button class="cat-tab" onclick="filterCat('mobile',this)" data-i18n="cat.mobile">Mobil</button>
+      <button class="cat-tab" onclick="filterCat('saas',this)">SaaS</button>
+      <button class="cat-tab" onclick="filterCat('ai',this)">AI</button>
+      <button class="cat-tab" onclick="filterCat('blockchain',this)">Blockchain</button>
+      <button class="cat-tab" onclick="filterCat('uiux',this)">UI / UX</button>
+      <button class="cat-tab" onclick="filterCat('devops',this)">DevOps</button>
+      <button class="cat-tab" onclick="filterCat('security',this)" data-i18n="cat.security">Güvenlik</button>
+      <button class="cat-tab" onclick="filterCat('seo',this)">SEO</button>
+    </div>
+  </div>
+
+  <div class="services-grid" id="servicesGrid"></div>
+</section>
+
+<!-- SUBSCRIPTIONS -->
+<section id="subscriptions">
+  <div class="reveal">
+    <div class="section-tag" data-i18n="plans.tag">Abonelik Planları</div>
+    <h2 class="section-title" data-i18n="plans.title">Planınızı Seçin</h2>
+    <p class="section-desc" data-i18n="plans.desc">Hosting, CDN, yedekleme ve geliştirici desteği — şeffaf aylık paketlerde.</p>
+  </div>
+
+  <div class="plans-grid">
+
+    <div class="plan-card reveal">
+      <div class="plan-name">Grow</div>
+      <div class="plan-price">2.500 TL</div>
+      <div class="plan-per" data-i18n="plans.per">/ ay</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li data-i18n="grow.f1">1 web sitesi hosting</li>
+        <li data-i18n="grow.f2">10 GB SSD depolama</li>
+        <li data-i18n="grow.f3">SSL sertifikası</li>
+        <li data-i18n="grow.f4">Haftalık yedekleme</li>
+        <li data-i18n="grow.f5">Temel destek</li>
+        <li data-i18n="grow.f6">3 kurumsal e-posta</li>
+      </ul>
+    </div>
+
+    <div class="plan-card reveal">
+      <div class="plan-name">Scale</div>
+      <div class="plan-price">4.500 TL</div>
+      <div class="plan-per" data-i18n="plans.per">/ ay</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li data-i18n="scale.f1">3 web sitesi</li>
+        <li data-i18n="scale.f2">25 GB hosting</li>
+        <li data-i18n="scale.f3">CDN dahil</li>
+        <li data-i18n="scale.f4">Günlük yedekleme</li>
+        <li data-i18n="scale.f5">Öncelikli destek</li>
+        <li data-i18n="scale.f6">10 e-posta hesabı</li>
+      </ul>
+    </div>
+
+    <div class="plan-card featured reveal">
+      <div class="plan-tag" data-i18n="plans.popular">Popüler</div>
+      <div class="plan-name">Scale Plus</div>
+      <div class="plan-price">7.500 TL</div>
+      <div class="plan-per" data-i18n="plans.per">/ ay</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li data-i18n="scaleplus.f1">10 web sitesi</li>
+        <li data-i18n="scaleplus.f2">60 GB hosting</li>
+        <li data-i18n="scaleplus.f3">Premium CDN</li>
+        <li data-i18n="scaleplus.f4">Gelişmiş güvenlik duvarı</li>
+        <li data-i18n="scaleplus.f5">25 e-posta hesabı</li>
+        <li data-i18n="scaleplus.f6">2s geliştirici desteği / ay</li>
+      </ul>
+    </div>
+
+    <div class="plan-card reveal">
+      <div class="plan-name">Premium</div>
+      <div class="plan-price">12.000 TL</div>
+      <div class="plan-per" data-i18n="plans.per">/ ay</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li data-i18n="premium.f1">25 web sitesi</li>
+        <li data-i18n="premium.f2">120 GB hosting</li>
+        <li data-i18n="premium.f3">Ayrılmış kaynaklar</li>
+        <li data-i18n="premium.f4">Gelişmiş güvenlik</li>
+        <li data-i18n="premium.f5">50 e-posta hesabı</li>
+        <li data-i18n="premium.f6">5s geliştirici desteği / ay</li>
+      </ul>
+    </div>
+
+    <div class="plan-card reveal">
+      <div class="plan-name">Enterprise</div>
+      <div class="plan-price">35.000 TL</div>
+      <div class="plan-per" data-i18n="plans.per">/ ay</div>
+      <div class="plan-divider"></div>
+      <ul class="plan-features">
+        <li data-i18n="ent.f1">Sınırsız web sitesi</li>
+        <li data-i18n="ent.f2">Ayrılmış bulut sunucu</li>
+        <li data-i18n="ent.f3">Global CDN</li>
+        <li data-i18n="ent.f4">Gelişmiş siber güvenlik</li>
+        <li data-i18n="ent.f5">%99.9 uptime SLA</li>
+        <li data-i18n="ent.f6">Özel hesap yöneticisi</li>
+        <li data-i18n="ent.f7">15s geliştirici desteği / ay</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- MAINTENANCE -->
+<section id="maintenance">
+  <div class="reveal">
+    <div class="section-tag" data-i18n="maint.tag">Bakım</div>
+    <h2 class="section-title" data-i18n="maint.title">Kusursuz Çalışsın</h2>
+    <p class="section-desc" data-i18n="maint.desc">Proaktif izleme, güvenlik güncellemeleri ve performans denetimleri — sizin adınıza.</p>
+  </div>
+
+  <div class="maint-grid">
+    <div class="maint-card reveal">
+      <div class="maint-num" data-i18n="maint1.num">01 — Yarı Yıllık</div>
+      <div class="maint-name" data-i18n="maint1.name">Yarı Yıllık Bakım</div>
+      <div class="maint-price">16.000 TL</div>
+      <div class="maint-label" data-i18n="maint.includes">Kapsam</div>
+      <ul class="maint-list">
+        <li data-i18n="maint.f1">Güvenlik güncellemeleri</li>
+        <li data-i18n="maint.f2">Performans optimizasyonu</li>
+        <li data-i18n="maint.f3">Sistem izleme</li>
+        <li data-i18n="maint.f4">Otomatik yedekleme</li>
+        <li data-i18n="maint.f5">Teknik raporlar</li>
+      </ul>
+    </div>
+    <div class="maint-card reveal">
+      <div class="maint-num" data-i18n="maint2.num">02 — Yıllık</div>
+      <div class="maint-name" data-i18n="maint2.name">Yıllık Bakım</div>
+      <div class="maint-price">24.000 TL</div>
+      <div class="maint-label" data-i18n="maint2.includes">Tüm Kapsam + Ek Olarak</div>
+      <ul class="maint-list">
+        <li data-i18n="maint2.f1">Öncelikli yanıt süresi</li>
+        <li data-i18n="maint2.f2">Üç aylık performans denetimleri</li>
+        <li data-i18n="maint2.f3">Yıllık güvenlik incelemesi</li>
+        <li data-i18n="maint2.f4">Genişletilmiş yedek geçmişi</li>
+        <li data-i18n="maint2.f5">Özel destek kanalı</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="cta-inner reveal">
+    <div class="cta-tag" data-i18n="cta.tag">Başlayalım</div>
+    <h2 class="cta-title">
+      <span data-i18n="cta.line1">Yazılımınızı Birlikte</span><br>
+      <em data-i18n="cta.line2">İnşa Edelim.</em>
+    </h2>
+    <p class="cta-sub" data-i18n="cta.sub">Projenizi konuşalım. En doğru yaklaşımı birlikte belirleyelim.</p>
+    <a href="mailto:contact@hermessoftware.com" class="btn-white" data-i18n="cta.btn">Bize Ulaşın →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div class="f-brand">
+      <div class="f-brand-mark">HS</div>
+      <p data-i18n="footer.desc">Modern işletmeler için premium yazılım geliştirme ve dijital altyapı.</p>
+    </div>
+    <div class="f-col">
+      <h5 data-i18n="footer.col1">Hizmetler</h5>
+      <ul>
+        <li><a href="#services" data-i18n="footer.web">Web Geliştirme</a></li>
+        <li><a href="#services" data-i18n="footer.mobile">Mobil Uygulamalar</a></li>
+        <li><a href="#services" data-i18n="footer.ai">Yapay Zeka Çözümleri</a></li>
+        <li><a href="#services">Blockchain</a></li>
+        <li><a href="#services" data-i18n="footer.saas">SaaS Platformları</a></li>
+      </ul>
+    </div>
+    <div class="f-col">
+      <h5 data-i18n="footer.col2">Şirket</h5>
+      <ul>
+        <li><a href="#subscriptions" data-i18n="footer.plans">Planlar</a></li>
+        <li><a href="#maintenance" data-i18n="footer.maint">Bakım</a></li>
+        <li><a href="#contact" data-i18n="footer.contact">İletişim</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 Hermes Software Inc. <span data-i18n="footer.rights">Tüm hakları saklıdır.</span></p>
+    <p data-i18n="footer.studio">Premium Yazılım Geliştirme Stüdyosu</p>
+  </div>
+</footer>
+
+<script>
+/* ────────────────────────────────────────────
+   I18N DATA
+──────────────────────────────────────────── */
+const i18n = {
+  tr: {
+    'nav.services':'Hizmetler','nav.plans':'Planlar','nav.maintenance':'Bakım','nav.contact':'İletişim',
+    'hero.eyebrow':'Premium Dijital Altyapı',
+    'hero.sub':'Landing sayfalarından kurumsal SaaS platformlarına, yapay zeka sistemlerinden blockchain altyapısına — ölçeklenebilir yazılımlar geliştiriyoruz.',
+    'hero.btn1':'Hizmetleri İncele →','hero.btn2':'Bize Ulaşın',
+    'hero.stat1':'Teslim Edilen Proje','hero.stat2':'Hizmet Kategorisi','hero.stat3':'Çalışma Süresi','hero.stat4':'Destek',
+    'services.tag':'Hizmet Kataloğu','services.title':'Neler Yapıyoruz',
+    'services.desc':'Web, mobil, yapay zeka, blockchain ve altyapı alanlarında hassas mühendislik.',
+    'services.search':'Hizmet ara…',
+    'cat.all':'Tümü','cat.web':'Web','cat.ecommerce':'E-Ticaret','cat.mobile':'Mobil','cat.security':'Güvenlik',
+    'plans.tag':'Abonelik Planları','plans.title':'Planınızı Seçin',
+    'plans.desc':'Hosting, CDN, yedekleme ve geliştirici desteği — şeffaf aylık paketlerde.',
+    'plans.per':'/ ay','plans.popular':'Popüler',
+    'grow.f1':'1 web sitesi hosting','grow.f2':'10 GB SSD depolama','grow.f3':'SSL sertifikası',
+    'grow.f4':'Haftalık yedekleme','grow.f5':'Temel destek','grow.f6':'3 kurumsal e-posta',
+    'scale.f1':'3 web sitesi','scale.f2':'25 GB hosting','scale.f3':'CDN dahil',
+    'scale.f4':'Günlük yedekleme','scale.f5':'Öncelikli destek','scale.f6':'10 e-posta hesabı',
+    'scaleplus.f1':'10 web sitesi','scaleplus.f2':'60 GB hosting','scaleplus.f3':'Premium CDN',
+    'scaleplus.f4':'Gelişmiş güvenlik duvarı','scaleplus.f5':'25 e-posta hesabı','scaleplus.f6':'2s geliştirici desteği / ay',
+    'premium.f1':'25 web sitesi','premium.f2':'120 GB hosting','premium.f3':'Ayrılmış kaynaklar',
+    'premium.f4':'Gelişmiş güvenlik','premium.f5':'50 e-posta hesabı','premium.f6':'5s geliştirici desteği / ay',
+    'ent.f1':'Sınırsız web sitesi','ent.f2':'Ayrılmış bulut sunucu','ent.f3':'Global CDN',
+    'ent.f4':'Gelişmiş siber güvenlik','ent.f5':'%99.9 uptime SLA','ent.f6':'Özel hesap yöneticisi','ent.f7':'15s geliştirici desteği / ay',
+    'maint.tag':'Bakım','maint.title':'Kusursuz Çalışsın',
+    'maint.desc':'Proaktif izleme, güvenlik güncellemeleri ve performans denetimleri — sizin adınıza.',
+    'maint.includes':'Kapsam','maint.f1':'Güvenlik güncellemeleri','maint.f2':'Performans optimizasyonu',
+    'maint.f3':'Sistem izleme','maint.f4':'Otomatik yedekleme','maint.f5':'Teknik raporlar',
+    'maint1.num':'01 — Yarı Yıllık','maint1.name':'Yarı Yıllık Bakım',
+    'maint2.num':'02 — Yıllık','maint2.name':'Yıllık Bakım',
+    'maint2.includes':'Tüm Kapsam + Ek Olarak',
+    'maint2.f1':'Öncelikli yanıt süresi','maint2.f2':'Üç aylık performans denetimleri',
+    'maint2.f3':'Yıllık güvenlik incelemesi','maint2.f4':'Genişletilmiş yedek geçmişi','maint2.f5':'Özel destek kanalı',
+    'cta.tag':'Başlayalım','cta.line1':'Yazılımınızı Birlikte','cta.line2':'İnşa Edelim.',
+    'cta.sub':'Projenizi konuşalım. En doğru yaklaşımı birlikte belirleyelim.','cta.btn':'Bize Ulaşın →',
+    'footer.desc':'Modern işletmeler için premium yazılım geliştirme ve dijital altyapı.',
+    'footer.col1':'Hizmetler','footer.col2':'Şirket',
+    'footer.web':'Web Geliştirme','footer.mobile':'Mobil Uygulamalar','footer.ai':'Yapay Zeka Çözümleri',
+    'footer.saas':'SaaS Platformları','footer.plans':'Planlar','footer.maint':'Bakım','footer.contact':'İletişim',
+    'footer.rights':'Tüm hakları saklıdır.','footer.studio':'Premium Yazılım Geliştirme Stüdyosu',
+    'card.from':'başlangıç fiyatı',
+    'no.results':'// sonuç bulunamadı',
+  },
+  en: {
+    'nav.services':'Services','nav.plans':'Plans','nav.maintenance':'Maintenance','nav.contact':'Contact',
+    'hero.eyebrow':'Premium Digital Infrastructure',
+    'hero.sub':'From landing pages to enterprise SaaS platforms, AI systems, and blockchain infrastructure — we engineer software that scales.',
+    'hero.btn1':'View Services →','hero.btn2':'Get in Touch',
+    'hero.stat1':'Projects Delivered','hero.stat2':'Service Categories','hero.stat3':'Uptime SLA','hero.stat4':'Support',
+    'services.tag':'Service Catalog','services.title':'What We Build',
+    'services.desc':'Precision-engineered digital products across web, mobile, AI, blockchain, and infrastructure.',
+    'services.search':'Search services…',
+    'cat.all':'All','cat.web':'Web Dev','cat.ecommerce':'E-Commerce','cat.mobile':'Mobile','cat.security':'Security',
+    'plans.tag':'Subscription Plans','plans.title':'Choose Your Plan',
+    'plans.desc':'Hosting, CDN, backups, and dev support — all in one transparent monthly package.',
+    'plans.per':'/ month','plans.popular':'Popular',
+    'grow.f1':'1 website hosting','grow.f2':'10 GB SSD storage','grow.f3':'SSL certificate',
+    'grow.f4':'Weekly backup','grow.f5':'Basic support','grow.f6':'3 corporate emails',
+    'scale.f1':'3 websites','scale.f2':'25 GB hosting','scale.f3':'CDN included',
+    'scale.f4':'Daily backups','scale.f5':'Priority support','scale.f6':'10 email accounts',
+    'scaleplus.f1':'10 websites','scaleplus.f2':'60 GB hosting','scaleplus.f3':'Premium CDN',
+    'scaleplus.f4':'Advanced firewall','scaleplus.f5':'25 email accounts','scaleplus.f6':'2h dev support / mo',
+    'premium.f1':'25 websites','premium.f2':'120 GB hosting','premium.f3':'Dedicated resources',
+    'premium.f4':'Advanced security','premium.f5':'50 email accounts','premium.f6':'5h dev support / mo',
+    'ent.f1':'Unlimited websites','ent.f2':'Dedicated cloud server','ent.f3':'Global CDN',
+    'ent.f4':'Advanced cybersecurity','ent.f5':'99.9% uptime SLA','ent.f6':'Dedicated account manager','ent.f7':'15h dev support / mo',
+    'maint.tag':'Maintenance','maint.title':'Keep It Flawless',
+    'maint.desc':'Proactive monitoring, security updates, and performance audits — handled for you.',
+    'maint.includes':'Includes','maint.f1':'Security updates','maint.f2':'Performance optimization',
+    'maint.f3':'System monitoring','maint.f4':'Automated backups','maint.f5':'Technical reports',
+    'maint1.num':'01 — Semi-Annual','maint1.name':'Semi-Annual Maintenance',
+    'maint2.num':'02 — Annual','maint2.name':'Annual Maintenance',
+    'maint2.includes':'Includes everything, plus',
+    'maint2.f1':'Priority response time','maint2.f2':'Quarterly performance audits',
+    'maint2.f3':'Annual security review','maint2.f4':'Extended backup history','maint2.f5':'Dedicated support channel',
+    'cta.tag':'Get Started','cta.line1':'Build Your Software','cta.line2':'With Hermes.',
+    'cta.sub':'Let\'s talk about your project. We\'ll figure out the right approach together.','cta.btn':'Contact Us →',
+    'footer.desc':'Premium software development & digital infrastructure for modern businesses.',
+    'footer.col1':'Services','footer.col2':'Company',
+    'footer.web':'Web Development','footer.mobile':'Mobile Apps','footer.ai':'AI Solutions',
+    'footer.saas':'SaaS Platforms','footer.plans':'Plans','footer.maint':'Maintenance','footer.contact':'Contact',
+    'footer.rights':'All rights reserved.','footer.studio':'Premium Software Development Studio',
+    'card.from':'starting from',
+    'no.results':'// no results found',
+  }
+};
+
+/* ────────────────────────────────────────────
+   SERVICES DATA (bilingual names)
+──────────────────────────────────────────── */
+const servicesData = [
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Landing Sayfası',en:'Landing Page'}, price:'35.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Kurumsal Web Sitesi',en:'Corporate Website'}, price:'75.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Premium Kurumsal Web Sitesi',en:'Premium Corporate Website'}, price:'120.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Çok Dilli Web Sitesi',en:'Multilingual Website'}, price:'160.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Blog Platformu',en:'Blog Platform'}, price:'90.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Haber Portalı',en:'News Portal'}, price:'140.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Startup Web Sitesi',en:'Startup Website'}, price:'110.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Kurumsal Portal',en:'Corporate Portal'}, price:'220.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Dashboard Web Uygulaması',en:'Dashboard Web App'}, price:'260.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Üyelik Web Sitesi',en:'Membership Website'}, price:'180.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Forum Platformu',en:'Forum Platform'}, price:'200.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'SaaS Web Paneli',en:'SaaS Web Panel'}, price:'280.000 TL' },
+  { cat:'web', label:{tr:'Web Geliştirme',en:'Web Dev'}, name:{tr:'Web Uygulaması',en:'Web Application'}, price:'320.000 TL' },
+  { cat:'ecommerce', label:{tr:'E-Ticaret',en:'E-Commerce'}, name:{tr:'Temel E-Ticaret',en:'Basic E-Commerce'}, price:'140.000 TL' },
+  { cat:'ecommerce', label:{tr:'E-Ticaret',en:'E-Commerce'}, name:{tr:'Orta Ölçekli E-Ticaret',en:'Mid-Scale E-Commerce'}, price:'220.000 TL' },
+  { cat:'ecommerce', label:{tr:'E-Ticaret',en:'E-Commerce'}, name:{tr:'Kurumsal E-Ticaret',en:'Enterprise E-Commerce'}, price:'420.000 TL' },
+  { cat:'ecommerce', label:{tr:'E-Ticaret',en:'E-Commerce'}, name:{tr:'Pazar Yeri Platformu',en:'Marketplace Platform'}, price:'900.000 TL' },
+  { cat:'ecommerce', label:{tr:'E-Ticaret',en:'E-Commerce'}, name:{tr:'Dropshipping Platformu',en:'Dropshipping Platform'}, price:'350.000 TL' },
+  { cat:'ecommerce', label:{tr:'E-Ticaret',en:'E-Commerce'}, name:{tr:'Abonelik E-Ticaret',en:'Subscription E-Commerce'}, price:'390.000 TL' },
+  { cat:'ecommerce', label:{tr:'E-Ticaret',en:'E-Commerce'}, name:{tr:'B2B Ticaret Sistemi',en:'B2B Commerce System'}, price:'480.000 TL' },
+  { cat:'mobile', label:{tr:'Mobil',en:'Mobile'}, name:{tr:'Temel Mobil Uygulama',en:'Basic Mobile App'}, price:'220.000 TL' },
+  { cat:'mobile', label:{tr:'Mobil',en:'Mobile'}, name:{tr:'iOS Uygulaması',en:'iOS App'}, price:'240.000 TL' },
+  { cat:'mobile', label:{tr:'Mobil',en:'Mobile'}, name:{tr:'Android Uygulaması',en:'Android App'}, price:'240.000 TL' },
+  { cat:'mobile', label:{tr:'Mobil',en:'Mobile'}, name:{tr:'Çok Platform Uygulama',en:'Cross-Platform App'}, price:'290.000 TL' },
+  { cat:'mobile', label:{tr:'Mobil',en:'Mobile'}, name:{tr:'Startup MVP',en:'Startup MVP'}, price:'260.000 TL' },
+  { cat:'mobile', label:{tr:'Mobil',en:'Mobile'}, name:{tr:'Kurumsal Mobil Uygulama',en:'Enterprise Mobile App'}, price:'650.000 TL' },
+  { cat:'mobile', label:{tr:'Mobil',en:'Mobile'}, name:{tr:'Sosyal Medya Uygulaması',en:'Social Media App'}, price:'900.000 TL' },
+  { cat:'mobile', label:{tr:'Mobil',en:'Mobile'}, name:{tr:'Pazar Yeri Uygulaması',en:'Marketplace App'}, price:'850.000 TL' },
+  { cat:'saas', label:{tr:'SaaS',en:'SaaS'}, name:{tr:'SaaS MVP',en:'SaaS MVP'}, price:'380.000 TL' },
+  { cat:'saas', label:{tr:'SaaS',en:'SaaS'}, name:{tr:'Startup SaaS',en:'Startup SaaS'}, price:'600.000 TL' },
+  { cat:'saas', label:{tr:'SaaS',en:'SaaS'}, name:{tr:'Kurumsal SaaS',en:'Enterprise SaaS'}, price:'1.200.000 TL' },
+  { cat:'saas', label:{tr:'SaaS',en:'SaaS'}, name:{tr:'Çok Kiracılı SaaS',en:'Multi-Tenant SaaS'}, price:'950.000 TL' },
+  { cat:'saas', label:{tr:'SaaS',en:'SaaS'}, name:{tr:'SaaS Mimarisi',en:'SaaS Architecture'}, price:'420.000 TL' },
+  { cat:'ai', label:{tr:'Yapay Zeka',en:'AI'}, name:{tr:'Yapay Zeka Chatbot',en:'AI Chatbot'}, price:'180.000 TL' },
+  { cat:'ai', label:{tr:'Yapay Zeka',en:'AI'}, name:{tr:'YZ Destek Botu',en:'AI Support Bot'}, price:'240.000 TL' },
+  { cat:'ai', label:{tr:'Yapay Zeka',en:'AI'}, name:{tr:'YZ Öneri Motoru',en:'AI Recommendation Engine'}, price:'320.000 TL' },
+  { cat:'ai', label:{tr:'Yapay Zeka',en:'AI'}, name:{tr:'YZ Görüntü İşleme',en:'AI Image Processing'}, price:'380.000 TL' },
+  { cat:'ai', label:{tr:'Yapay Zeka',en:'AI'}, name:{tr:'YZ NLP Sistemleri',en:'AI NLP Systems'}, price:'420.000 TL' },
+  { cat:'ai', label:{tr:'Yapay Zeka',en:'AI'}, name:{tr:'YZ Otomasyon',en:'AI Automation'}, price:'260.000 TL' },
+  { cat:'ai', label:{tr:'Yapay Zeka',en:'AI'}, name:{tr:'YZ SaaS Platformu',en:'AI SaaS Platform'}, price:'850.000 TL' },
+  { cat:'blockchain', label:{tr:'Blockchain',en:'Blockchain'}, name:{tr:'NFT Pazar Yeri',en:'NFT Marketplace'}, price:'420.000 TL' },
+  { cat:'blockchain', label:{tr:'Blockchain',en:'Blockchain'}, name:{tr:'Token Geliştirme',en:'Token Development'}, price:'120.000 TL' },
+  { cat:'blockchain', label:{tr:'Blockchain',en:'Blockchain'}, name:{tr:'Akıllı Sözleşme',en:'Smart Contract'}, price:'150.000 TL' },
+  { cat:'blockchain', label:{tr:'Blockchain',en:'Blockchain'}, name:{tr:'Blockchain Uygulaması',en:'Blockchain App'}, price:'480.000 TL' },
+  { cat:'blockchain', label:{tr:'Blockchain',en:'Blockchain'}, name:{tr:'Kripto Borsası',en:'Crypto Exchange'}, price:'1.400.000 TL' },
+  { cat:'uiux', label:{tr:'UI / UX',en:'UI / UX'}, name:{tr:'Landing UI',en:'Landing UI'}, price:'15.000 TL' },
+  { cat:'uiux', label:{tr:'UI / UX',en:'UI / UX'}, name:{tr:'Web UI Tasarımı',en:'Web UI Design'}, price:'35.000 TL' },
+  { cat:'uiux', label:{tr:'UI / UX',en:'UI / UX'}, name:{tr:'Mobil UI Tasarımı',en:'Mobile UI Design'}, price:'45.000 TL' },
+  { cat:'uiux', label:{tr:'UI / UX',en:'UI / UX'}, name:{tr:'UX Araştırması',en:'UX Research'}, price:'55.000 TL' },
+  { cat:'uiux', label:{tr:'UI / UX',en:'UI / UX'}, name:{tr:'Tasarım Sistemi',en:'Design System'}, price:'75.000 TL' },
+  { cat:'devops', label:{tr:'DevOps',en:'DevOps'}, name:{tr:'Sunucu Kurulumu',en:'Server Setup'}, price:'20.000 TL' },
+  { cat:'devops', label:{tr:'DevOps',en:'DevOps'}, name:{tr:'Bulut Mimarisi',en:'Cloud Architecture'}, price:'80.000 TL' },
+  { cat:'devops', label:{tr:'DevOps',en:'DevOps'}, name:{tr:'CI/CD Pipeline',en:'CI/CD Pipeline'}, price:'40.000 TL' },
+  { cat:'devops', label:{tr:'DevOps',en:'DevOps'}, name:{tr:'Docker Kurulumu',en:'Docker Setup'}, price:'25.000 TL' },
+  { cat:'devops', label:{tr:'DevOps',en:'DevOps'}, name:{tr:'Kubernetes Kurulumu',en:'Kubernetes Setup'}, price:'120.000 TL' },
+  { cat:'security', label:{tr:'Güvenlik',en:'Security'}, name:{tr:'Güvenlik Denetimi',en:'Security Audit'}, price:'60.000 TL' },
+  { cat:'security', label:{tr:'Güvenlik',en:'Security'}, name:{tr:'Sızma Testi',en:'Penetration Testing'}, price:'120.000 TL' },
+  { cat:'security', label:{tr:'Güvenlik',en:'Security'}, name:{tr:'Web Güvenlik Sertleştirme',en:'Web Security Hardening'}, price:'40.000 TL' },
+  { cat:'security', label:{tr:'Güvenlik',en:'Security'}, name:{tr:'API Güvenliği',en:'API Security'}, price:'45.000 TL' },
+  { cat:'seo', label:{tr:'SEO',en:'SEO'}, name:{tr:'SEO Kurulumu',en:'SEO Setup'}, price:'25.000 TL' },
+  { cat:'seo', label:{tr:'SEO',en:'SEO'}, name:{tr:'Aylık SEO',en:'Monthly SEO'}, price:'18.000 TL' },
+  { cat:'seo', label:{tr:'SEO',en:'SEO'}, name:{tr:'Teknik SEO',en:'Technical SEO'}, price:'30.000 TL' },
+  { cat:'seo', label:{tr:'SEO',en:'SEO'}, name:{tr:'Hız Optimizasyonu',en:'Speed Optimization'}, price:'15.000 TL' },
+];
+
+/* ────────────────────────────────────────────
+   STATE
+──────────────────────────────────────────── */
+let currentLang = 'tr';
+let activeCat = 'all';
+
+/* ────────────────────────────────────────────
+   RENDER SERVICES
+──────────────────────────────────────────── */
+function renderServices(data) {
+  const grid = document.getElementById('servicesGrid');
+  if (!data.length) {
+    grid.innerHTML = `<div class="no-results">${i18n[currentLang]['no.results']}</div>`;
+    return;
+  }
+  grid.innerHTML = data.map(s => `
+    <div class="service-card">
+      <div class="card-arrow">↗</div>
+      <div class="card-cat-tag">${s.label[currentLang]}</div>
+      <div class="card-name">${s.name[currentLang]}</div>
+      <div class="card-price">${s.price}<span>${i18n[currentLang]['card.from']}</span></div>
+    </div>
+  `).join('');
+}
+
+function filterServices() {
+  const q = document.getElementById('searchInput').value.toLowerCase().trim();
+  let filtered = activeCat === 'all' ? servicesData : servicesData.filter(s => s.cat === activeCat);
+  if (q) filtered = filtered.filter(s =>
+    s.name[currentLang].toLowerCase().includes(q) ||
+    s.label[currentLang].toLowerCase().includes(q)
+  );
+  renderServices(filtered);
+}
+
+function filterCat(cat, btn) {
+  activeCat = cat;
+  document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('searchInput').value = '';
+  filterServices();
+}
+
+/* ────────────────────────────────────────────
+   LANGUAGE SWITCH
+──────────────────────────────────────────── */
+function setLang(lang) {
+  currentLang = lang;
+  document.documentElement.lang = lang;
+
+  // button states
+  document.getElementById('btn-tr').classList.toggle('active', lang === 'tr');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+
+  // translate all [data-i18n] elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (i18n[lang][key] !== undefined) el.textContent = i18n[lang][key];
+  });
+
+  // translate placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    if (i18n[lang][key] !== undefined) el.placeholder = i18n[lang][key];
+  });
+
+  // re-render service cards in new language
+  filterServices();
+}
+
+/* ────────────────────────────────────────────
+   NAV
+──────────────────────────────────────────── */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+});
+
+function toggleNav() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+document.querySelectorAll('.nav-links a').forEach(a =>
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'))
+);
+
+/* ────────────────────────────────────────────
+   SCROLL REVEAL
+──────────────────────────────────────────── */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ────────────────────────────────────────────
+   INIT
+──────────────────────────────────────────── */
+renderServices(servicesData);
+</script>
+</body>
+</html>
